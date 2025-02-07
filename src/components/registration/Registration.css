@@ -17,31 +17,32 @@ body {
 
 .wrapper {
   position: relative;
-  max-width: 430px;
+  max-width: 900px; /* Increased width */
   width: 100%;
   background: #fff;
-  padding: 34px;
-  border-radius: 6px;
+  padding: 40px;
+  border-radius: 8px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .wrapper h2 {
   position: relative;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
   color: #333;
+  text-align: center;
 }
 
-.wrapper h2::before {
+/* .wrapper h2::before {
   content: '';
   position: absolute;
-  left: 0;
+  left: 9;
   bottom: 0;
   height: 3px;
   width: 28px;
   border-radius: 12px;
   background: #4070f4;
-}
+} */
 
 .wrapper form {
   margin-top: 30px;
@@ -73,24 +74,13 @@ form .input-box select {
   border-color: #4070f4;
 }
 
-form .policy {
-  display: flex;
-  align-items: center;
-}
-
-form h3 {
-  color: #707070;
-  font-size: 14px;
-  font-weight: 500;
-  margin-left: 10px;
-}
-
 .input-box.button input {
   color: #fff;
   letter-spacing: 1px;
   border: none;
   background: #4070f4;
   cursor: pointer;
+  padding: 14px;
 }
 
 .input-box.button input:hover {
@@ -110,4 +100,21 @@ form .text h3 a {
 
 form .text h3 a:hover {
   text-decoration: underline;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px; /* Increased gap */
+}
+.left-section, .right-section {
+  width: 48%; /* Adjusted width to fit larger form */
+}
+.wrapper {
+  max-width: 900px; /* Increased width */
+}
+.center {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }

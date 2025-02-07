@@ -177,4 +177,27 @@ input {
   .modal-content button:hover {
     background: #0056b3;
   }
-  
+  .links-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.links-container span {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Adjust spacing */
+}
+
+.register-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+

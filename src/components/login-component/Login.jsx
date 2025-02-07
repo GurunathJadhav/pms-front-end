@@ -5,6 +5,7 @@ import './Login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../modal/Modal';
+import { Link } from 'react-router-dom'
 
 const Login = () => {
   const [login, setLogin] = useState({
@@ -119,13 +120,19 @@ const Login = () => {
               />
             </div>
           </div>
+          <div className="links-container">
+  <span>Not Registered? <Link to="/signup" className="register-link">Register</Link></span>
+  <a href="/forgot-password" className="forgot-password">Forgot password?</a>
+</div>
 
-          <div className="forgot-password">Forgot password?</div>
           <button type="submit">Login</button>
+          
         </form>
       </div>
       <div className="image-section"></div>
+      
     </div>
+    
   );
 };
 
