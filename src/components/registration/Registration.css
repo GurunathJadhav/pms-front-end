@@ -17,7 +17,7 @@ body {
 
 .wrapper {
   position: relative;
-  max-width: 900px; /* Increased width */
+  max-width: 900px;
   width: 100%;
   background: #fff;
   padding: 40px;
@@ -26,36 +26,24 @@ body {
 }
 
 .wrapper h2 {
-  position: relative;
   font-size: 24px;
   font-weight: 600;
   color: #333;
   text-align: center;
 }
 
-/* .wrapper h2::before {
-  content: '';
-  position: absolute;
-  left: 9;
-  bottom: 0;
-  height: 3px;
-  width: 28px;
-  border-radius: 12px;
-  background: #4070f4;
-} */
-
 .wrapper form {
   margin-top: 30px;
 }
 
 .wrapper form .input-box {
-  height: 52px;
   margin: 18px 0;
+  width: 100%;
+  height: 40px;
 }
 
-form .input-box input,
-form .input-box select {
-  height: 100%;
+form .input-box input {
+  height: 40px;
   width: 100%;
   outline: none;
   padding: 0 15px;
@@ -63,28 +51,39 @@ form .input-box select {
   font-weight: 400;
   color: #333;
   border: 1.5px solid #C7BEBE;
-  border-bottom-width: 2.5px;
   border-radius: 6px;
   transition: all 0.3s ease;
+  background: #eaeaea;
 }
 
-.input-box input:focus,
-.input-box input:valid,
-.input-box select:focus {
-  border-color: #4070f4;
+.input-box input:focus {
+  border-color: #303031;
+  background: #fff;
+}
+
+.input-box input::placeholder {
+  color: #888;
+  font-size: 14px;
+}
+
+/* Adjusting button placement inside the right section */
+.right-section .input-box.button {
+  margin-top: 18px; /* Matches spacing of input fields */
 }
 
 .input-box.button input {
+  height: 50px; /* Same as input fields */
+  width: 100%; /* Full width alignment */
   color: #fff;
-  letter-spacing: 1px;
   border: none;
-  background: #4070f4;
+  background: black;
   cursor: pointer;
-  padding: 14px;
+  border-radius: 6px;
+  font-size: 17px;
 }
 
 .input-box.button input:hover {
-  background: #0e4bf1;
+  background: #333;
 }
 
 form .text h3 {
@@ -94,27 +93,12 @@ form .text h3 {
 }
 
 form .text h3 a {
-  color: #4070f4;
+  color: #007bff;
   text-decoration: none;
+  font-weight: 600;
 }
 
 form .text h3 a:hover {
   text-decoration: underline;
 }
 
-.form-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 30px; /* Increased gap */
-}
-.left-section, .right-section {
-  width: 48%; /* Adjusted width to fit larger form */
-}
-.wrapper {
-  max-width: 900px; /* Increased width */
-}
-.center {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
