@@ -1,59 +1,53 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
-body {
-  min-height: 100vh;
+/* Wrapper */
+.wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: white;
-}
-
-.wrapper {
-  position: relative;
-  max-width: 900px;
-  width: 100%;
+  justify-content: center; /* Centers the content */
   background: #fff;
+  width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
   padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-.wrapper h2 {
+/* Layout for form and image */
+.content-container {
+  display: flex; /* Enables side-by-side layout */
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Form Section */
+.form-section {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Move H2 slightly up */
+.form-section h2 {
   font-size: 24px;
   font-weight: 600;
   color: #333;
   text-align: center;
+  margin-top: -10px; /* Adjust for proper positioning */
 }
 
-.wrapper form {
-  margin-top: 30px;
+/* Input Fields */
+.input-box {
+  margin-bottom: 15px;
 }
 
-.wrapper form .input-box {
-  margin: 18px 0;
+.input-box input {
   width: 100%;
   height: 40px;
-}
-
-form .input-box input {
-  height: 40px;
-  width: 100%;
-  outline: none;
   padding: 0 15px;
-  font-size: 17px;
-  font-weight: 400;
-  color: #333;
+  font-size: 16px;
   border: 1.5px solid #C7BEBE;
   border-radius: 6px;
-  transition: all 0.3s ease;
   background: #eaeaea;
+  transition: all 0.3s ease;
 }
 
 .input-box input:focus {
@@ -61,22 +55,13 @@ form .input-box input {
   background: #fff;
 }
 
-.input-box input::placeholder {
-  color: #888;
-  font-size: 14px;
-}
-
-/* Adjusting button placement inside the right section */
-.right-section .input-box.button {
-  margin-top: 18px; /* Matches spacing of input fields */
-}
-
+/* Button */
 .input-box.button input {
-  height: 50px; /* Same as input fields */
-  width: 100%; /* Full width alignment */
+  height: 45px;
+  width: 100%;
   color: #fff;
-  border: none;
   background: black;
+  border: none;
   cursor: pointer;
   border-radius: 6px;
   font-size: 17px;
@@ -86,19 +71,20 @@ form .input-box input {
   background: #333;
 }
 
-form .text h3 {
-  color: #333;
-  width: 100%;
-  text-align: center;
+/* Image Section */
+.image-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  background: url('../../assets/images/login-icon-3.jpg') no-repeat center center/cover;
+
 }
 
-form .text h3 a {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: 600;
+.image-section img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px; /* Optional: Adds rounded corners */
 }
-
-form .text h3 a:hover {
-  text-decoration: underline;
-}
-
