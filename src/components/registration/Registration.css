@@ -8,7 +8,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  padding: 40px;
+  padding: 20px;
 }
 
 /* Layout for form and image */
@@ -22,21 +22,24 @@
 /* Form Section */
 .form-section {
   flex: 1;
-  padding: 20px;
+    padding: 20px;  
+   
+ 
 }
 
 /* Move H2 slightly up */
 .form-section h2 {
+  position: relative;
   font-size: 24px;
   font-weight: 600;
   color: #333;
   text-align: center;
-  margin-top: -10px; /* Adjust for proper positioning */
+  margin-bottom: 30px;
 }
 
 /* Input Fields */
 .input-box {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .input-box input {
@@ -88,3 +91,14 @@
   object-fit: cover;
   border-radius: 10px; /* Optional: Adds rounded corners */
 }
+
+.input-box label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 5px; /* Space between label and input */
+  color: #555;
+  text-align: left; /* Align the label to the left */
+}
+
+
