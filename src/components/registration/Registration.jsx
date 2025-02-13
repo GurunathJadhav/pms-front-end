@@ -1,33 +1,73 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Registration.css'
 import { Link } from 'react-router-dom'
 
 
 const Registration = () => {
-  return (
+
+const[registration, setRegistration]=useState({
+  employee_ID:"",
+  firstName:"",
+  lastName:"",
+  email:"",
+  password:""
+})
+
+
+
+const {employee_ID,firstName,lastName,email,password}= registration
+
+
+const onInputChange = (e) => {
+  setRegistration({ ...registration, [e.target.name]: e.target.value });
+};
+
+const onSubmit = async (e) => {
+  e.preventDefault();
+  console.log(registration)
+}
+
+
+return (
+
 <div className="wrapper">
       <div className="content-container">
         {/* Form Section */}
         <div className="form-section">
           <h2>Registration Form</h2>
-          <form>
+          <form  onSubmit={onSubmit}>
             <div className="form-container">
+            <div className="input-box">
+              
+              <label htmlFor="Employee ID">Employee ID</label>
+              <input type="text" name="employee_ID" placeholder=" Enter your Employee ID"  required 
+                value={employee_ID}
+                onChange={onInputChange} />
+            </div>
               <div className="input-box">
               
                 <label htmlFor="First Name">Firstname</label>
-                <input type="text" name="firstName" placeholder=" First Name" />
+                <input type="text" name="firstName" placeholder=" Enter your firstname" required 
+                value={firstName}
+                onChange={onInputChange}/>
               </div>
               <div className="input-box">
               <label htmlFor="Last Name">Lastname</label>
-                <input type="text" name="lastName" placeholder=" Last Name" />
+                <input type="text" name="lastName" placeholder=" Enter your lastname" required 
+                value={lastName}
+                onChange={onInputChange}/>
               </div>
               <div className="input-box">
               <label htmlFor="email">Email</label>
-                <input type="email" name="email" placeholder="Enter Your Email" />
+                <input type="email" name="email" placeholder="Enter your email" required 
+                value={email}
+                onChange={onInputChange}/>
               </div>
               <div className="input-box">
               <label htmlFor="Password">Password</label>
-                <input type="password" name="password" placeholder="Create Your Password" />
+                <input type="password" name="password" placeholder="Create your password" required 
+                value={password}
+                onChange={onInputChange}/>
               </div>
             </div>
             <div className="input-box button">
