@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import './Registration.css'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 
 const Registration = () => {
 
 const[registration, setRegistration]=useState({
-  employee_ID:"",
+  hrId:"",
   firstName:"",
   lastName:"",
   email:"",
@@ -15,7 +16,7 @@ const[registration, setRegistration]=useState({
 
 
 
-const {employee_ID,firstName,lastName,email,password}= registration
+const {hrId,firstName,lastName,email,password}= registration
 
 
 const onInputChange = (e) => {
@@ -24,7 +25,8 @@ const onInputChange = (e) => {
 
 const onSubmit = async (e) => {
   e.preventDefault();
-  console.log(registration)
+  const result= await axios.post("http://localhost:8080/api/v1/pms/registration/hr-registration", registration)
+  console.log(result)
 }
 
 
@@ -40,8 +42,8 @@ return (
             <div className="input-box">
               
               <label htmlFor="Employee ID">Employee ID</label>
-              <input type="text" name="employee_ID" placeholder=" Enter your Employee ID"  required 
-                value={employee_ID}
+              <input type="text" name="hrId" placeholder=" Enter your Employee ID"  required 
+                value={hrId}
                 onChange={onInputChange} />
             </div>
               <div className="input-box">
