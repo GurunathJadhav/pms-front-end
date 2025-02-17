@@ -36,7 +36,7 @@ const ManagerDashboard = () => {
       <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
         <div className="profile-container">
           <img src={profile} alt="Profile" className="profile-pic" />
-          <h2>Hi Ravindra Kulkarni</h2>
+          <h2>Ravindra Kulkarni</h2>
         </div>
         <ul>
           <li><Link to="/manager-dashboard">Dashboard</Link></li>
