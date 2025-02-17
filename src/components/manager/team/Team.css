@@ -1,0 +1,109 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: row; /* Side-by-side layout */
+    background-color: #f8f9fa;
+    min-height: 80vh;
+    width: 100%; /* Full width of the screen */
+  }
+  
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 10px;
+  }
+  
+  .home-icon {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .logo {
+    height: 50px;
+  }
+  
+  .content-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .title {
+    color: #6a1b9a;
+  }
+  
+  .search-filter {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  .search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 250px;
+  }
+  
+  .search-icon {
+    margin-right: 5px;
+  }
+  
+  .filter-btn {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .team-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .team-table th, .team-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .employee-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .employee-img {
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .start-btn {
+    background: #a333c8;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .start-btn.disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  .back-arrow {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  
+
+  
