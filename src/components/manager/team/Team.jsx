@@ -6,11 +6,16 @@ import { FaSearch, FaHome,FaArrowLeft  } from "react-icons/fa";
 const Team = () => {
   return (
     <div className="dashboard-container">
+      {/* Top Bar with Flexbox */}
       <div className="top-bar">
-        <FaArrowLeft className="back-arrow" />
-        <FaHome className="home-icon" />
-        <img src=" " alt="Nikitha PMS" className="logo" />
+        <div className="nav-icons">
+          <FaArrowLeft className="back-arrow" />
+          <FaHome className="home-icon" />
+        </div>
+        <img src="logo.png" alt="Nikitha PMS" className="logo" />
       </div>
+
+      {/* Content Section */}
       <div className="content-card">
         <h2 className="title">My Team</h2>
         <div className="search-filter">
@@ -20,6 +25,8 @@ const Team = () => {
           </div>
           <button className="filter-btn">All Departments</button>
         </div>
+        
+        {/* Table */}
         <table className="team-table">
           <thead>
             <tr>
@@ -33,13 +40,9 @@ const Team = () => {
             <tr>
               <td>
                 <div className="employee-info">
-                  <img
-                    src="https://via.placeholder.com/40"
-                    alt="Sarah Wilson"
-                    className="employee-img"
-                  />
+                  <img src="https://via.placeholder.com/40" alt=" " className="employee-img" />
                   <div>
-                    <strong>Sarah Wilson</strong>
+                  <span className="employee-name">Sarah Wilson</span>
                     <p>sarah.wilson@example.com</p>
                   </div>
                 </div>
@@ -53,13 +56,9 @@ const Team = () => {
             <tr>
               <td>
                 <div className="employee-info">
-                  <img
-                    src="https://via.placeholder.com/40"
-                    alt="Ravi"
-                    className="employee-img"
-                  />
+                  <img src="https://via.placeholder.com/40" alt=" " className="employee-img" />
                   <div>
-                    <strong>Ravi</strong>
+                  <span className="employee-name">Ravindra</span>
                     <p>Ravi@gmail.com</p>
                   </div>
                 </div>
