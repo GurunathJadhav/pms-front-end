@@ -27,6 +27,7 @@ const onSubmit = async (e) => {
   e.preventDefault();
   const result= await axios.post("http://localhost:8080/api/v1/pms/registration/hr-registration", registration)
   console.log(result)
+  // console.log(registration)
 }
 
 
