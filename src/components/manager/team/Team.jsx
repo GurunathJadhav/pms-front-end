@@ -1,7 +1,7 @@
 import React from "react";
 import "./Team.css";
 import { FaSearch, FaHome,FaArrowLeft  } from "react-icons/fa";
-// import logo from "./nikitha_logo.png"; // Ensure the logo is placed correctly in your project
+ import logo from "../../../assets/images/nikithas-logo.png"; // Ensure the logo is placed correctly in your project
 
 const Team = () => {
   return (
@@ -12,7 +12,7 @@ const Team = () => {
           <FaArrowLeft className="back-arrow" />
           <FaHome className="home-icon" />
         </div>
-        <img src="logo.png" alt="Nikitha PMS" className="logo" />
+        <img src={logo} alt="Nikitha PMS" className="logo" />
       </div>
 
       {/* Content Section */}
