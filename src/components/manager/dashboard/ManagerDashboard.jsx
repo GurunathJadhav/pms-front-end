@@ -41,7 +41,7 @@ const ManagerDashboard = () => {
         <ul>
           <li><Link to="/manager-dashboard">Dashboard</Link></li>
           <li><Link to="#">My Team</Link></li>
-          <li><Link to="#">My Profile</Link></li>
+          <li><Link to="/manager-profile">My Profile</Link></li>
         </ul>
       </div>
 

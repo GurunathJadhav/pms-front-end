@@ -78,7 +78,7 @@ return (
             </div>
             <div className="text">
               <h3>
-                Already have an account? <Link to="/" className="Login-link">login</Link>
+                Already have an account? <Link to="/" className="Login-link">Login</Link>
               </h3>
             </div>
           </form>
