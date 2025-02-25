@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
 import { FaUser, FaLock } from 'react-icons/fa';
-
 import logo from '../../assets/images/nikithas-logo.png';
 import './Login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../modal/Modal';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const Login = () => {
-  const [login, setLogin] = useState({
-    username: '',
-    password: ''
-  });
-
+  const [login, setLogin] = useState({ username: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
   const navigation = useNavigate();
@@ -22,11 +17,6 @@ const Login = () => {
 
   const onInputChange = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
-  };
-
-  const validatePassword = (password) => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
-    return passwordRegex.test(password);
   };
 
   const navigateTo = async (token) => {
@@ -46,18 +36,8 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    if (!validatePassword(password)) {
-      setErrorMessage(
-        'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.'
-      );
-      setShowModal(true);
-      return;
-    }
-
     setErrorMessage('');
     setShowModal(false);
-
     try {
       const response = await axios.post('http://localhost:8080/api/v1/pms/auth/login', login);
       if (response.data.token) {
@@ -81,19 +61,19 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
+    <div className="login-container">
       {showModal && <Modal message={errorMessage} closeModal={closeModal} />}
-      <div className="form-section">
-        <div className="logo">
+      <div className="login-form-section">
+        <div className="login-logo">
           <img src={logo} alt="Logo" />
         </div>
         <h1>PMS</h1>
         <h3>Login</h3>
         <form onSubmit={onSubmit}>
-          <div className="input-group">
+          <div className="login-input-group">
             <label htmlFor="username">Username</label>
-            <div className="input-wrapper">
-              <FaUser className="input-icon" />
+            <div className="login-input-wrapper">
+              <FaUser className="login-input-icon" />
               <input
                 id="username"
                 type="text"
@@ -106,10 +86,10 @@ const Login = () => {
             </div>
           </div>
 
-          <div className="input-group">
+          <div className="login-input-group">
             <label htmlFor="password">Password</label>
-            <div className="input-wrapper">
-              <FaLock className="input-icon" />
+            <div className="login-input-wrapper">
+              <FaLock className="login-input-icon" />
               <input
                 id="password"
                 type="password"
@@ -121,19 +101,17 @@ const Login = () => {
               />
             </div>
           </div>
-          <div className="links-container">
-  <span>Not Registered? <Link to="/signup" className="register-link">Register</Link></span>
-  <a href="/forgot-password" className="forgot-password">Forgot password?</a>
-</div>
 
-          <button type="submit">Login</button>
-          
+          <div className="login-links-container">
+            <span>Not Registered? <Link to="/signup" className="login-register-link">Register</Link></span>
+            <a href="/forgot-password" className="login-forgot-password">Forgot password?</a>
+          </div>
+
+          <button type="submit" className="login-button">Login</button>
         </form>
       </div>
-      <div className="image-section"></div>
-      
+      <div className="login-image-section"></div>
     </div>
-    
   );
 };
 

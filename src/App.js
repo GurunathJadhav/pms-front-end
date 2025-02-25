@@ -10,6 +10,7 @@ import ManagerProfile from './components/manager/profile/ManagerProfile';
 
 
 
+
 function App() {
   return (
     <div className="App">
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/employee-dashboard" element={<EmployeeDashboard/>} />
           <Route exact path="/signup" element={<Registration/>} />
           <Route exact path="/manager-profile" element={<ManagerProfile/>} />
+          
           
           
           
