@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
-import "./ManagerDashboard.css";
 import { Link } from "react-router-dom";
 import { Users, NotebookPen, CheckCircle, Bell } from "lucide-react";
+import axios from "axios";
+
+import "./ManagerDashboard.css";
 import logo from "../../../assets/images/nikithas-logo.png";
 import profile from "../../../assets/images/profile1.jpg";
 
@@ -13,8 +15,28 @@ const ManagerDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
+    setSidebarOpen((prevState) => !prevState);
   };
+
+  const [managerData, setManagerData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/v1/pms/manager/profile", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        setManagerData(response.data);
+        // console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const data = {
     labels: ["Completed", "Pending"],
@@ -36,12 +58,18 @@ const ManagerDashboard = () => {
       <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
         <div className="profile-container">
           <img src={profile} alt="Profile" className="profile-pic" />
-          <h2>Ravindra Kulkarni</h2>
+          <h2>{managerData?.firstName || "First Name"} {managerData?.lastName || "Last Name"}</h2>
         </div>
         <ul>
-          <li><Link to="/manager-dashboard">Dashboard</Link></li>
-          <li><Link to="#">My Team</Link></li>
-          <li><Link to="#">My Profile</Link></li>
+          <li>
+            <Link to="/manager-dashboard">Dashboard</Link>
+          </li>
+          <li>
+            <Link to="#">My Team</Link>
+          </li>
+          <li>
+            <Link to="/manager-profile">My Profile</Link>
+          </li>
         </ul>
       </div>
 

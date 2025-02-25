@@ -5,7 +5,11 @@ import HrDashboard from './components/hr/HrDashboard';
 import EmployeeDashboard from './components/employee/EmployeeDashboard';
 import ManagerDashboard from './components/manager/dashboard/ManagerDashboard';
 import Registration from './components/registration/Registration';
+
 import Team from './components/manager/team/Team';
+
+import ManagerProfile from './components/manager/profile/ManagerProfile';
+
 
 
 
@@ -20,7 +24,11 @@ function App() {
           <Route exact path="/hr-dashboard" element={<HrDashboard/>} />
           <Route exact path="/employee-dashboard" element={<EmployeeDashboard/>} />
           <Route exact path="/signup" element={<Registration/>} />
+
           <Route exact path="/my-team" element={<Team/>} />
+
+          <Route exact path="/manager-profile" element={<ManagerProfile/>} />
+
           
           
           
