@@ -16,14 +16,15 @@ body, html {
 }
 
 .manager-container {
-    width: 100vw;
-    height: 100vh;
+    width: 90vw;
+    height: 90vh;
     background: white;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    border-radius: 10px;
 }
 
 .manager-header {
@@ -47,11 +48,13 @@ body, html {
 }
 
 .manager-logo {
-    position: absolute;
+    position: absolute;  /* Position it absolutely relative to .manager-container */
+    top: 30px;
+    right: 70px;
     height: 100px;
-    left: 90%;
-    /* width: 100px; */
+    z-index: 1;
 }
+
 
 /* Profile section */
 .manager-profile-card {
@@ -105,7 +108,7 @@ body, html {
     font-size: 14px;
 }
 
-h3 {
+.manager-contact-info h3 {
     margin-bottom: 10px;
     font-size: 18px;
     color: #333;

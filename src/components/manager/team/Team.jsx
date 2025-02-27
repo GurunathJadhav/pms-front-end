@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Team.css"; // Importing the CSS file
 import { FaSearch } from "react-icons/fa";
 import logo from '../../../assets/images/nikithas-logo.png';
+import { Link } from "react-router-dom";
+import Loader from '../../modal/loader/Loader';
 
 const teamMembers = [
   { name: "Sarah Wilson", department: "Product Design", position: "Senior Designer", email: "sarah.w@company.com", image: "https://randomuser.me/api/portraits/women/1.jpg" },
@@ -14,15 +18,47 @@ const teamMembers = [
   { name: "James Wilson", department: "Marketing", position: "SEO Specialist", email: "james.w@company.com", image: "https://randomuser.me/api/portraits/men/5.jpg" },
   { name: "Maria Garcia", department: "Sales", position: "Account Manager", email: "maria.g@company.com", image: "https://randomuser.me/api/portraits/women/4.jpg" },
   { name: "Thomas Anderson", department: "Engineering", position: "Backend Developer", email: "thomas.a@company.com", image: "https://randomuser.me/api/portraits/men/6.jpg" },
-  { name: "Maria Garcia", department: "Sales", position: "Account Manager", email: "maria.g@company.com", image: "https://randomuser.me/api/portraits/women/4.jpg" },
-  { name: "Thomas Anderson", department: "Engineering", position: "Backend Developer", email: "thomas.a@company.com", image: "https://randomuser.me/api/portraits/men/6.jpg" },
-
 ];
 
 export default function TeamPage() {
+  const [teamList, setTeamList] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
   const entriesPerPage = 10;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        console.error("No token found. Redirecting to login...");
+        navigate("/login");
+        return;
+      }
+
+      try {
+        const response = await axios.get("http://localhost:8080/api/v1/pms/manager/profile", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setTeamList(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        if (error.response?.status === 401) {
+          console.error("Unauthorized! Redirecting to login...");
+          localStorage.removeItem("token");
+          navigate("/login");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [navigate]);
+
+  
 
   const filteredTeam = teamMembers.filter(member =>
     member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -41,6 +77,7 @@ export default function TeamPage() {
 
   return (
     <div className="team-container">
+       {loading && <Loader />}
       <div className="content">
         <div className="header">
           <h1>My Team</h1>
@@ -78,7 +115,8 @@ export default function TeamPage() {
                   <td>{member.position}</td>
                   <td>{member.email}</td>
                   <td>
-                    <button className="contact-button">Start PMS</button>
+                    
+                    <Link to="/manager-review" className="start-pms-button">Start Review</Link>
                   </td>
                 </tr>
               ))}

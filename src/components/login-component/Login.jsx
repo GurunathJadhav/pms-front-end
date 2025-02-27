@@ -6,11 +6,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../modal/Modal';
 import { Link } from 'react-router-dom';
+import Loader from '../modal/loader/Loader';
 
 const Login = () => {
   const [login, setLogin] = useState({ username: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const navigation = useNavigate();
 
   const { username, password } = login;
@@ -19,6 +22,7 @@ const Login = () => {
     setLogin({ ...login, [e.target.name]: e.target.value });
   };
 
+  // Function to decide dashboard navigation based on role
   const navigateTo = async (token) => {
     try {
       const response = await axios.get(`http://localhost:8080/api/v1/pms/auth/${token}`);
@@ -34,15 +38,31 @@ const Login = () => {
     }
   };
 
+  // Form submit handler with custom validation
   const onSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
     setShowModal(false);
+
+    // Collect validation errors
+    const errors = [];
+    if (!username.trim()) errors.push('Username is required.');
+    if (!password.trim()) errors.push('Password is required.');
+
+    // If any errors exist, show modal and stop login process
+    if (errors.length > 0) {
+      setErrorMessage(errors.join('\n'));
+      setShowModal(true);
+      return;
+    }
+
+    setLoading(true);
+
     try {
       const response = await axios.post('http://localhost:8080/api/v1/pms/auth/login', login);
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
-        navigateTo(response.data.token);
+        await navigateTo(response.data.token);
       }
     } catch (error) {
       if (error.response) {
@@ -53,6 +73,8 @@ const Login = () => {
         setErrorMessage('An unexpected error occurred. Please try again later.');
       }
       setShowModal(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -62,14 +84,19 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      {loading && <Loader />}
       {showModal && <Modal message={errorMessage} closeModal={closeModal} />}
+
       <div className="login-form-section">
         <div className="login-logo">
           <img src={logo} alt="Logo" />
         </div>
+
         <h1>PMS</h1>
         <h3>Login</h3>
+
         <form onSubmit={onSubmit}>
+          {/* Username Input */}
           <div className="login-input-group">
             <label htmlFor="username">Username</label>
             <div className="login-input-wrapper">
@@ -79,13 +106,13 @@ const Login = () => {
                 type="text"
                 name="username"
                 placeholder="Enter your username"
-                required
                 value={username}
                 onChange={onInputChange}
               />
             </div>
           </div>
 
+          {/* Password Input */}
           <div className="login-input-group">
             <label htmlFor="password">Password</label>
             <div className="login-input-wrapper">
@@ -95,21 +122,26 @@ const Login = () => {
                 type="password"
                 name="password"
                 placeholder="Enter your password"
-                required
                 value={password}
                 onChange={onInputChange}
               />
             </div>
           </div>
 
+          {/* Links - Register and Forgot Password */}
           <div className="login-links-container">
-            <span>Not Registered? <Link to="/signup" className="login-register-link">Register</Link></span>
+            <span>
+              Not Registered? <Link to="/signup" className="login-register-link">Register</Link>
+            </span>
             <a href="/forgot-password" className="login-forgot-password">Forgot password?</a>
           </div>
 
+          {/* Submit Button */}
           <button type="submit" className="login-button">Login</button>
         </form>
       </div>
+
+      {/* Background Image Section */}
       <div className="login-image-section"></div>
     </div>
   );

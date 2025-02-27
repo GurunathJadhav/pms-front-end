@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
-import { Link } from "react-router-dom";
+import { Pie, getElementsAtEvent } from "react-chartjs-2";
+import { Link, useNavigate } from "react-router-dom";
 import { Users, NotebookPen, CheckCircle, Bell } from "lucide-react";
 import axios from "axios";
+import Notification from '../../modal/notification/Notification';
+import { NavLink } from 'react-router-dom';
 
 import "./ManagerDashboard.css";
 import logo from "../../../assets/images/nikithas-logo.png";
@@ -13,28 +15,28 @@ Chart.register(ArcElement, Tooltip, Legend);
 
 const ManagerDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setSidebarOpen((prevState) => !prevState);
-  };
-
+  const [notificationOpen, setNotificationOpen] = useState(false);
   const [managerData, setManagerData] = useState(null);
+
+  const chartRef = useRef(); // <-- Add ref
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/v1/pms/manager/profile", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const response = await axios.get(
+          "http://localhost:8080/api/v1/pms/manager/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         setManagerData(response.data);
-        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchData();
   }, []);
 
@@ -49,23 +51,49 @@ const ManagerDashboard = () => {
     ],
   };
 
+  const handleChartClick = (event) => {
+    const chart = chartRef.current;
+    if (!chart) return;
+
+    const elements = getElementsAtEvent(chart, event);
+    if (elements.length > 0) {
+      const clickedIndex = elements[0].index;
+      if (clickedIndex === 0) {
+        navigate("/completed-assessments"); // Completed
+      } else if (clickedIndex === 1) {
+        navigate("/pending-assessments"); // Pending
+      }
+    }
+  };
+
   return (
     <div className="dashboard-container">
-      <button className="sidebar-toggle" onClick={toggleSidebar}>
+      <button
+        className="sidebar-toggle"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
         ☰
       </button>
 
       <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
         <div className="profile-container">
           <img src={profile} alt="Profile" className="profile-pic" />
-          <h2>{managerData?.firstName || "First Name"} {managerData?.lastName || "Last Name"}</h2>
+          <h2>
+            {managerData?.firstName || "First Name"}{" "}
+            {managerData?.lastName || "Last Name"}
+          </h2>
         </div>
         <ul>
           <li>
-            <Link to="/manager-dashboard">Dashboard</Link>
+            <NavLink
+              to="/manager-dashboard"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Dashboard
+            </NavLink>
           </li>
           <li>
-            <Link to="#">My Team</Link>
+            <Link to={`/my-team/${managerData?.managerId}`}>My Team</Link>
           </li>
           <li>
             <Link to="/manager-profile">My Profile</Link>
@@ -78,8 +106,14 @@ const ManagerDashboard = () => {
           <h1>Manager Dashboard</h1>
           <img src={logo} alt="Logo" className="dashboard-logo" />
           <div className="header-icons">
-            <Bell className="notification-icon" />
-            <button className="logout-btn">Logout</button>
+            <Bell
+              className="notification-icon" 
+              onClick={() => setNotificationOpen(!notificationOpen)}
+            />
+            {notificationOpen && (
+              <Notification onClose={() => setNotificationOpen(false)} />
+            )}
+            <Link to="/" className="logout-btn">Logout</Link>
           </div>
         </div>
 
@@ -108,12 +142,20 @@ const ManagerDashboard = () => {
         </div>
 
         <div className="chart-container">
-          <h3 className="chart-title">Assessment Completion Status</h3>
+          <h3 className="chart-title">Assessment Status</h3>
           <div className="chart-wrapper">
-            <Pie data={data} />
+            <Pie
+              ref={chartRef} // <-- Attach ref to Pie
+              data={data}
+              onClick={handleChartClick} // <-- Pass only event to handler
+            />
           </div>
         </div>
       </div>
+
+      {notificationOpen && (
+        <Notification onClose={() => setNotificationOpen(false)} />
+      )}
     </div>
   );
 };

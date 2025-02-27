@@ -9,6 +9,9 @@ import Registration from './components/registration/Registration';
 import Team from './components/manager/team/Team';
 
 import ManagerProfile from './components/manager/profile/ManagerProfile';
+import PerformanceReview from './components/manager/review/PerformanceReview';
+import Complete from './components/manager/status/complete/Complete';
+import Pending from './components/manager/status/pending/Pending';
 
 
 
@@ -25,9 +28,13 @@ function App() {
           <Route exact path="/employee-dashboard" element={<EmployeeDashboard/>} />
           <Route exact path="/signup" element={<Registration/>} />
 
-          <Route exact path="/my-team" element={<Team/>} />
+          <Route exact path="/my-team/:managerid" element={<Team/>} />
 
           <Route exact path="/manager-profile" element={<ManagerProfile/>} />
+          <Route exact path="/manager-review" element={<PerformanceReview/>} />
+          <Route exact path="/completed-assessments" element={<Complete/>} />
+          <Route exact path="/pending-assessments" element={<Pending/>} />
+
 
           
           

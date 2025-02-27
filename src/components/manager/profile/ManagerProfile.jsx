@@ -5,7 +5,7 @@ import axios from "axios";
 import "./ManagerProfile.css";
 import logo from "../../../assets/images/nikithas-logo.png";
 import profile from "../../../assets/images/profile1.jpg";
-
+import Loader from '../../modal/loader/Loader';
 const ManagerProfile = () => {
   const [managerData, setManagerData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -43,15 +43,14 @@ const ManagerProfile = () => {
     fetchData();
   }, [navigate]);
 
-  if (loading) return <p>Loading...</p>;
+  
 
   return (
     <div className="manager-container">
+       {loading && <Loader/>}
       <header className="manager-header">
         <div className="header-left">
-          <Link to="/manager-dashboard" className="icon-link">
-            <FaArrowLeft className="icon back-icon" />
-          </Link>
+          
           <Link to="/manager-dashboard" className="icon-link">
             <FaHome className="icon home-icon" />
           </Link>
