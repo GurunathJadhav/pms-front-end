@@ -24,12 +24,8 @@
 }
 
 /* Modal Header */
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
-}
+
+
 
 .close-btn {
   background: none;
@@ -39,11 +35,27 @@
 }
 
 /* Dropdown Filter */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  position: relative;
+}
+
+/* Move dropdown to the right and make text bold */
 .filter-dropdown {
-  border: none;
-  background: transparent;
-  font-size: 14px;
+  margin-left: auto; /* Push dropdown to the right */
+  margin-right: 50px; /* Add space between dropdown and close button */
+  /* border: solid black; */
+  /* background: transparent; */
+  font-size: 15px;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
   cursor: pointer;
+  background: white;
+  border-radius: 4px;
+  font-weight: bold; /* Make "All notifications" bold */
 }
 
 /* Tabs Section */
@@ -151,4 +163,21 @@
 .mark-all-read:hover,
 .clear-all:hover {
   background: #f0f0f0;
+}
+.notification-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Push "Mark as Read" button to the right */
+.mark-read {
+  margin-left: auto;
+}
+.notification-list {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 10px;
+  text-align: left;
 }

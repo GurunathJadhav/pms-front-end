@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Modal = ({ message, closeModal }) => {
+const Modal = ({ message, closeModal ,title}) => {
     return (
         <div className="login-modal-overlay">
             <div className="login-modal-content">
-                <h2>Error</h2>
+                <h2>{title}</h2>
                 <p>{message}</p>
                 <button onClick={closeModal}>Close</button>
             </div>

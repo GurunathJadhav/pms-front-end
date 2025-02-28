@@ -13,6 +13,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const[title,setTitle]=useState('');
 
   const navigation = useNavigate();
 
@@ -42,6 +43,7 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
+    setTitle('')
     setShowModal(false);
 
     // Collect validation errors
@@ -52,6 +54,7 @@ const Login = () => {
     // If any errors exist, show modal and stop login process
     if (errors.length > 0) {
       setErrorMessage(errors.join('\n'));
+      setTitle('Login Error');
       setShowModal(true);
       return;
     }
@@ -67,8 +70,10 @@ const Login = () => {
     } catch (error) {
       if (error.response) {
         setErrorMessage('Invalid credentials. Please try again.');
+        setTitle('Login Error');
       } else if (error.request) {
         setErrorMessage('Unable to connect to the server. Please check if the backend is running.');
+        setTitle('Server Error');
       } else {
         setErrorMessage('An unexpected error occurred. Please try again later.');
       }
@@ -85,7 +90,8 @@ const Login = () => {
   return (
     <div className="login-container">
       {loading && <Loader />}
-      {showModal && <Modal message={errorMessage} closeModal={closeModal} />}
+      {showModal && <Modal message={errorMessage} closeModal={closeModal} title={title} />}
+
 
       <div className="login-form-section">
         <div className="login-logo">

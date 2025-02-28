@@ -54,6 +54,7 @@ const Notification = ({ onClose }) => {
         </div>
       </div>
     </div>
+
   );
 };
 
